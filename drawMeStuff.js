@@ -1,7 +1,8 @@
-const lineCount = 20;
-const lineHeight = 2;
+const lineCount = 30;
+const lineHeight = 4;
 const frameSpeed = 10;
-const steps = 100;
+const steps = 300;
+const fillColor = "#FFFFFF"
 
 let prevPos = 'strHor';
 
@@ -161,7 +162,7 @@ function draw(path) {
 	//console.log(path)
 
 	let ctx = canvas.getContext("2d");
-	ctx.fillStyle = "black";
+	ctx.fillStyle = fillColor;
 
 	let lastIndex = 0;
 
@@ -170,17 +171,17 @@ function draw(path) {
 	path.forEach((v, i, a) => {
 
 		if (v === "strHor") {
-			ctx.fillRect(x, y, lineGap, lineHeight);
+			ctx.fillRect(x, y-(lineHeight/2), lineGap, lineHeight);
 			x += lineGap;
 			lastDir = ''
 		} else if (v === "strVer") {
 			if (a[i-1] === "up" || lastDir === "up") {
 				lastDir = "up";
 				y -= lineGap;
-				ctx.fillRect(x, y, lineHeight, lineGap);
+				ctx.fillRect(x-(lineHeight/2), y, lineHeight, lineGap);
 			} else if(a[i-1] === "down" || lastDir === "down") {
 				lastDir = "down";
-				ctx.fillRect(x, y, lineHeight, lineGap);
+				ctx.fillRect(x-(lineHeight/2), y, lineHeight, lineGap);
 				y += lineGap;
 				
 			}
@@ -260,9 +261,8 @@ function createArc(ctx, pos, pPos, lastDir) {
 
 		ctx.arc(x+xInc, y+yInc, radius, startingAngle, endingAngle, counterclockwise);
 
-
 		ctx.lineWidth = lineHeight;
-		ctx.strokeStyle = "#000000";
+		ctx.strokeStyle = fillColor;
 
 		ctx.stroke();
 		ctx.closePath();
@@ -273,3 +273,4 @@ function createArc(ctx, pos, pPos, lastDir) {
 	y += yInc;
 
 }
+
