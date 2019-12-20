@@ -17,7 +17,7 @@ let x = 0;
 let y = 0;
 let yInc = 0;
 let canvas;
-let lineGap = 0;
+let lineGap = 31;
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -50,18 +50,12 @@ function init() {
 
 	canvas.width = document.body.offsetHeight;
 	canvas.height = document.body.offsetHeight;
-
-	if (xRandom) {
-		lineGap = Number((canvas.width / (lineCount + 1)).toFixed(0));
-	} else {
-		lineGap = Number((canvas.height / (lineCount + 1)).toFixed(0));
-	}
 	
-	getRandomStart(lineCount, lineGap);
+	getRandomStart(lineCount);
 }
 
 
-function getRandomStart(lineCount, lineGap) {
+function getRandomStart(lineCount) {
 
 	let coords = [];
 
