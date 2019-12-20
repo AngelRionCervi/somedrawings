@@ -2,12 +2,12 @@ const lineCount = 30;
 const lineHeight = 4;
 const frameSpeed = 10;
 const steps = 500;
-const fillColor = "#523C2F"
-const bgColor = "#EED9CA"
+const fillColor = "#201C13"
+const bgColor = "#D7CCAC"
 const scale = 2;
 const dotRadius = scale;
-const treeWidth = document.body.offsetHeight/100*scale;
-const treeHeight = document.body.offsetHeight/100*scale;
+const treeWidth = document.body.offsetHeight/100*(scale*1.5);
+const treeHeight = document.body.offsetHeight/100*(scale*1.5);
 
 const xRandom = true;
 
@@ -146,11 +146,15 @@ function draw(path) {
 
 	tree.onload = () => {
 
-		if(xRandom) {
+		if (xRandom) {
 			for (let u = 0; u < x; u += lineGap) {
 				for(let n = 0; n < canvas.height; n += lineGap) {
+					let xInc = 0;
+					if (n % 2 === 0) {
+						xInc = lineGap/2;
+					} 
 					ctx.beginPath();
-					ctx.arc(u + lineGap / 2 + dotRadius / 2, n + treeHeight*1.5 - dotRadius, dotRadius, 0, 2 * Math.PI);
+					ctx.arc(u + lineGap / 2 + dotRadius / 2 + xInc, n + treeHeight*1.5 - dotRadius, dotRadius, 0, 2 * Math.PI);
 					ctx.fill();
 				}
 			}
@@ -161,22 +165,37 @@ function draw(path) {
 
 			if (v !== "down" && v !== "up" && v !== "left") {
 				for (let u = y; u < canvas.height; u += lineGap) {
+
+					let xInc = 0;
+					if (u % 2 === 0) {
+						xInc = lineGap/2;
+					} 
+
 					ctx.beginPath();
-					ctx.arc(x + lineGap / 2 + dotRadius / 2, u + treeHeight*1.5 - dotRadius, dotRadius, 0, 2 * Math.PI);
+					ctx.arc(x + lineGap / 2 + dotRadius / 2 + xInc, u + treeHeight*1.5 - dotRadius, dotRadius, 0, 2 * Math.PI);
 					ctx.fill();
 				}
 				for (let u = 0; u < y; u += lineGap) {
+
+					let xInc = 0;
+					if (u % 2 === 0) {
+						xInc = lineGap/2;
+					} 
 					
-					ctx.drawImage(tree, x + (lineGap / 2 - treeWidth / 2), u + treeHeight/2, treeWidth, treeHeight);
+					ctx.drawImage(tree, x + (lineGap / 2 - treeWidth / 2) + xInc, u + treeHeight/2, treeWidth, treeHeight);
 					
 				}
 			}
 
 			if (v === "left") {
+				let xInc = 0;
+				if (y % 2 === 0) {
+					xInc = lineGap/2;
+				} 
 				ctx.fillStyle = bgColor;
 				ctx.beginPath();
-				ctx.fillRect(x - lineGap, y, lineGap, lineGap);
-				ctx.drawImage(tree, x + (lineGap / 2 - treeWidth / 2) - lineGap, y + treeHeight/2, treeWidth, treeHeight);
+				ctx.fillRect(x - lineGap - dotRadius / 2 + xInc, y + treeHeight - 1, lineGap, lineGap/2);
+				ctx.drawImage(tree, x + (lineGap / 2 - treeWidth / 2) - lineGap + xInc, y + treeHeight/2, treeWidth, treeHeight);
 			}
 
 			if (v === "right") {
