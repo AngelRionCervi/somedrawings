@@ -1,0 +1,15 @@
+body {
+	padding: 0;
+	margin: 0;
+}
+
+.canvas-container {
+	width: 100%;
+	height: 100%;
+	margin-left: auto;
+    margin-right: auto;
+}
+#elcanvas {
+	padding: 0;
+	margin: 0 auto;
+}
